@@ -142,7 +142,7 @@ def main_loop():
         sleep(1)
         seconds_passed = timing.seconds_from_last_hour()
         color = get_color(seconds_passed)
-        flash_if_its_time_to(seconds_passed)
+        flash_if_its_time_to(seconds_passed, color)
         brightness(p, color)
 
 

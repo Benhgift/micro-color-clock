@@ -1,5 +1,7 @@
 #Micropython Flashy Clock
 
+Quickstart: Put your free key from https://timezonedb.com/ into the `key` variable in config.py. Then upload all these files and open up a webrepl and type `main_loop()`
+
 Using an adafruit feather esp8266 and a NeoPixel board you can make it flash a color at an interval so that you always know what time it is. I put this behind my monitor. 
 
 To upload the code, start a micropython repl by going here:
