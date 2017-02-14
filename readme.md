@@ -11,3 +11,8 @@ http://micropython.org/webrepl/?
 And put in your ip address which you can get from connecting to the board via serial through putty and getting the output of webrepl.start(), alternatively you can just try a few ips on your network till it works. Mine was 192.168.0.108 
 
 If there are questions just follow the getting started tutorial here https://learn.adafruit.com/micropython-basics-esp8266-webrepl/access-webrepl
+
+Example at the top of the hour:
+
+![image of project with light on wall](http://i.imgur.com/7eMx8Jc.jpg)
+
