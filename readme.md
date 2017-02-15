@@ -12,7 +12,7 @@ And put in your ip address which you can get from connecting to the board via se
 
 If there are questions just follow the getting started tutorial here https://learn.adafruit.com/micropython-basics-esp8266-webrepl/access-webrepl
 
-Example at the top of the hour:
+Example sped up:
 
 ![image of project with light on wall](https://media.giphy.com/media/tPRepiQ9dNGKc/giphy.gif)
 
