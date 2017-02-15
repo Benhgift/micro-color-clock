@@ -14,5 +14,5 @@ If there are questions just follow the getting started tutorial here https://lea
 
 Example at the top of the hour:
 
-![image of project with light on wall](https://media.giphy.com/media/BYNlLfJ9gLKla/giphy.gif)
+![image of project with light on wall](https://media.giphy.com/media/tPRepiQ9dNGKc/giphy.gif)
 
