@@ -3,7 +3,6 @@ import esp
 import gc                                                                                               
 import webrepl                                                                                          
 from my_main import *
-import my_main 
 
 esp.osdebug(None)                                                                                      
 webrepl.start()                                                                                         
@@ -11,9 +10,10 @@ gc.collect()
 
 
 def readfile(file="boot.py"):
-  with open(file,'r') as thefile:
-      data = thefile.read()
-  print(data)
+    with open(file,'r') as thefile:
+        for line in thefile:
+            print(line, end='')
+    print()
 
 
 def wipe_module(module):
@@ -23,7 +23,11 @@ def wipe_module(module):
 def rel():
     try:
         wipe_module('my_main')
+        wipe_module('test_all')
+        wipe_module('pixel')
+        wipe_module('timing')
+        wipe_module('config')
     except:
         pass
     from my_main import *
-    import my_main
+    from test_all import *
