@@ -1,6 +1,6 @@
 import config
 import time
-from my_main import *
+from main import *
 from timing import Timing
 from pixel import Pixels
 

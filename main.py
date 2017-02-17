@@ -1,4 +1,5 @@
 import time
+import sys
 import urequests
 import config
 from pixel import Pixels
@@ -35,14 +36,27 @@ def get_color(seconds_passed):
             return [int(x) for x in vals]
 
 
+def record_error(exc):
+    with open('last_error', 'w') as f:
+        sys.print_exception(exc, f)
+    with open('last_error', 'a+') as f:
+        _time = time.time()
+        f.write('\n\n' + str(_time) + '\n')
+        sleep(10)
+
+
 def main_loop():
     print("starting loop")
     pixels = Pixels()
     timing = Timing(config.url, config.secs_between_flashes, pixels)
     while True:
         sleep(1)
-        seconds_passed = timing.get_secs_into_hour()
-        color = get_color(seconds_passed)
-        print(color)
-        timing.flash_if_its_time_to(color)
-        pixels.brightness(color)
+        try:
+            seconds_passed = timing.get_secs_into_hour()
+            color = get_color(seconds_passed)
+            if seconds_passed % 5 == 0:
+                print(color)
+            timing.flash_if_its_time_to(color)
+            pixels.brightness(color)
+        except Exception as e:
+            record_error(e)
