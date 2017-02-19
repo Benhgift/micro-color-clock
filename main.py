@@ -2,38 +2,25 @@ import time
 import sys
 import urequests
 import config
+import hls
 from pixel import Pixels
 from timing import Timing
 from time import sleep
 
 
 def get_percent_of_hour(seconds_passed):
-    return (seconds_passed / (60 * 60)) * 100
+    return (seconds_passed / (60 * 60))
 
 
 def get_color(seconds_passed):
     percent = get_percent_of_hour(seconds_passed)
+    # start at green
+    adjusted_percent = hls.ONE_THIRD + percent
     max_brightness = 100
-    # this maps color to each position of the list that NeoPixel expects
-    color_map = {'r':0, 'g':1, 'b':2}
-    # this maps color onto the positions of the HOUR. Right now it's in thirds
-    # but {0:green, 1:red} would mean "be green for the first half hour, then red"
-    split_map = {0:color_map['g'], 1:color_map['b'], 2:color_map['r']}
-    # how many segments have we split the hour into
-    splits = len(split_map)
-    # a chunk is one segment of the hour out of 100%. Note the float bugfix
-    chunk = 100.0001 / splits  
-    scale = (splits/100) * max_brightness
-    for i in range(1, splits+1):
-        cur_chunk = chunk * i
-        last_chunk = chunk * (i-1)
-        if percent <= cur_chunk:
-            vals = [0] * len(color_map)
-            growing_color = (percent - last_chunk) * scale
-            shrinking_color = (cur_chunk - percent) * scale
-            vals[split_map[i-1]] = shrinking_color
-            vals[split_map[(i) % splits]] = growing_color
-            return [int(x) for x in vals]
+    # hls will double the brightness so we cut it in half first
+    hls_brightness = max_brightness/2
+    rgb = hls.hls_to_rgb(adjusted_percent, hls_brightness, -1.007905138339921)
+    return [int(x) for x in rgb]
 
 
 def record_error(exc):
@@ -59,4 +46,5 @@ def main_loop():
             timing.flash_if_its_time_to(color)
             pixels.brightness(color)
         except Exception as e:
+            print("error")
             record_error(e)
